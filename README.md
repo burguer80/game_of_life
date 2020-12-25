@@ -1,35 +1,41 @@
 # GameOfLife
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/game_of_life`. To experiment with that code, run `bin/console` for an interactive prompt.
+The Game of Life, also known simply as Life, is a cellular automaton devised by the British mathematician John Horton
+Conway in 1970. The “game” is a zero-player game, meaning that its evolution is determined by its initial state,
+requiring no further input. One interacts with the Game of Life by creating an initial configuration and observing how
+it evolves.
 
-TODO: Delete this and the text above, and describe your gem
+The implementation pattern used on this game is inspired in Redux.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+1. From the root folder execute:
 
-```ruby
-gem 'game_of_life'
-```
+       $ bundle install
 
-And then execute:
+2. Build the gem:
 
-    $ bundle install
+       $ gem build game_of_life.gemspec
 
-Or install it yourself as:
+3. Install :
 
-    $ gem install game_of_life
+       $ gem install game_of_life-1.0.0.gem
+
 
 ## Usage
 
-TODO: Write usage instructions here
+You can start it on any computer where Ruby is installed by executing the command irb from your command line interface
 
-## Development
+    $ irb
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+require the gem and you are ready to start a new game. 
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+```ruby
+require "game_of_life"
+ 
 
-## Contributing
+Actions::StartGame.new.call
+```
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/game_of_life.
+## Demo
+![preview](https://user-images.githubusercontent.com/47440/103113227-a06e4600-460e-11eb-9a8f-192fb5dbd4f9.gif)
