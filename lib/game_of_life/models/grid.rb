@@ -4,6 +4,8 @@ module Models
     attr_reader :size
 
     def initialize(size = 50)
+      # TODO: Implement Error handling
+      return false unless size.positive?
       @size = size
       @cells = build_cells
     end

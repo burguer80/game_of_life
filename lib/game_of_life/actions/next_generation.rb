@@ -2,6 +2,9 @@ module Actions
   class NextGeneration
 
     def initialize(grid)
+      # TODO: Implement Error handling
+      return false unless grid
+
       @grid = grid
     end
 
