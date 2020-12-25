@@ -29,18 +29,14 @@ RSpec.describe Models::Grid do
   describe "#count_neighbours" do
     it "should invoke cells_near_by method with proper cell_row and cell_col args" do
       sum_of_near_by_cells = 0
-
       expect(grid).to receive(:cells_near_by).with(cell_row, cell_col).and_return(sum_of_near_by_cells)
-
       grid.count_neighbours(cell_row, cell_col)
     end
 
     it "should the proper count of neighbours" do
       expected_count_neighbours = 4
       grid.instance_variable_set(:@cells, mocked_cells)
-
       count_neighbours = grid.count_neighbours(cell_row, cell_col)
-
       expect(count_neighbours).to eq(expected_count_neighbours)
     end
 
@@ -60,9 +56,7 @@ RSpec.describe Models::Grid do
     it "should return the proper amount of cells near by" do
       grid.instance_variable_set(:@cells, mocked_cells)
       expected_cells_near_by = 5
-
       cells_near_by = grid.cells_near_by(cell_row, cell_col)
-
       expect(cells_near_by).to eq(expected_cells_near_by)
     end
   end
@@ -70,7 +64,6 @@ RSpec.describe Models::Grid do
   describe "#compute_cell" do
     it "should invoke count_neighbours with proper row and col arg" do
       expect(grid).to receive(:count_neighbours).with(cell_row, cell_col).and_return(0)
-
       grid.compute_cell(cell_row, cell_col)
     end
 
@@ -80,19 +73,19 @@ RSpec.describe Models::Grid do
 
       after(:example) do
         grid.instance_variable_set(:@cells, mocked_cells)
-
         expect(grid).to receive(:count_neighbours).with(cell_row, cell_col).and_return(live_neighbours_count)
-
         cell_status = grid.compute_cell(cell_row, cell_col)
-
         expect(cell_status).to eq(expected_cell_status)
-
       end
+
       context "Any living cell with fewer than two live neighbours dies, as if caused by underpopulation." do
+        after(:example) do
+          mocked_cells[cell_row][cell_col] = expected_cell_status
+        end
+
         it "should return 0 if the cell status is 1 and has less than 2 live neighbours" do
           live_neighbours_count = 1
           expected_cell_status = 0
-          mocked_cells[cell_row][cell_col] = expected_cell_status
         end
       end
 
@@ -100,7 +93,6 @@ RSpec.describe Models::Grid do
         it "should return 0 if the cell status is 1 and has more than 3 live neighbours" do
           live_neighbours_count = 4
           expected_cell_status = 0
-          mocked_cells[cell_row][cell_col] = expected_cell_status
         end
       end
 
@@ -108,12 +100,10 @@ RSpec.describe Models::Grid do
         it "should return 1 if the cell status is 1 and has 2 live neighbours" do
           live_neighbours_count = 2
           expected_cell_status = 1
-          mocked_cells[cell_row][cell_col] = expected_cell_status
         end
         it "should return 1 if the cell status is 1 and has 3 live neighbours" do
           live_neighbours_count = 3
           expected_cell_status = 1
-          mocked_cells[cell_row][cell_col] = expected_cell_status
         end
       end
 
