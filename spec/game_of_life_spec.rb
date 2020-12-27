@@ -5,7 +5,11 @@ RSpec.describe GameOfLife do
     expect(GameOfLife::VERSION).not_to be nil
   end
 
-  it "does something useful" do
-    expect(true).to eq(true)
+  it "Should invoke Actions::StartGame.new and call methods" do
+    start_game_action = Actions::StartGame.new
+    expect(Actions::StartGame).to receive(:new).and_return(start_game_action)
+    expect(start_game_action).to receive(:call)
+
+    described_class.run
   end
 end
