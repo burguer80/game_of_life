@@ -32,9 +32,9 @@ require the gem and you are ready to start a new game.
 
 ```ruby
 require "game_of_life"
- 
 
-Actions::StartGame.new.call
+
+GameOfLife.run
 ```
 
 ## Demo
